@@ -966,7 +966,12 @@ textarea {
 /* ================== Custom Stayles ==================== */
 /* ====================================================== */
 :root{
-	--main-decor-color:hsl(0, 36%, 74%);
+	/* --main-decor-color:hsl(0, 36%, 74%);
+	--secondary-decor-color:#222; */
+--main-decor-color:hsl(0, 0%, 85%);
+--secondary-decor-color:hsl(225, 98%, 16%);
+--color3:#545454;
+--color4:#FFFFFF;
 	--main-decor-color-hue:0;
 	--main-decor-color-sat:36%;
 	--main-decor-color-lig:74%;
@@ -1005,7 +1010,8 @@ margin: 0;
 	padding: .5rem;
 }
 .custom-logo{
-	width: 100px;
+	height: 70px;
+	width: auto;
 }
 /* ------------- header search stylins------------ */
 .site-header form {
@@ -1047,7 +1053,7 @@ padding: 1rem;
 /* ------------category navigation--------------------- */
 .main-navigation{
 	display: flex;
-	background-color:#222;
+	background-color:var(--secondary-decor-color);
 	
 }
 .main-navigation #categories-navigation{
@@ -1228,21 +1234,30 @@ z-index: 20;
 text-align: center;
 }
 /* ---------------------------footer stylings------------------- */
-.site-info{
+.copy-rights{
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem;
-	background-color: var(--main-decor-color);
+	background-color: var(--secondary-decor-color);
 }
-.site-info p{
+.copy-rights p{
 	display: flex;
-	
+	color: white;
 	margin: 0;
 }
-.site-info p *{
+.copy-rights p *{
 	white-space: nowrap;
 	display: table;
 	padding-inline: .1rem;
+}
+
+
+.countact-info{
+	background-color: var(--main-decor-color);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 1.5rem;
 }
 /*--------------main layout adjustments--------------*/
 .site-main:not(.front-page){
@@ -1322,11 +1337,13 @@ text-align: center;
 		width: 100%;
 		margin: 2rem;
 	}
-	.site-info{
+	.copy-rights{
 		flex-wrap: wrap;
 	}
 	.site-header{
 		position: relative;
+
+		height: 66px;
 	}
 
 	.main-navigation #categories-navigation{
@@ -1361,7 +1378,7 @@ text-align: center;
 	}
 	#top-menu-bar{
 		justify-content: center;
-		height: 50px;
+		height: 100%;
 	}
 	#top-menu-bar .widget_search{
 		
@@ -1369,7 +1386,7 @@ text-align: center;
 
 	}
 	.custom-logo{
-		width:50px;
+		height:50px;
 	}
 	#categories-navigation .widget_search{
 		display: initial;

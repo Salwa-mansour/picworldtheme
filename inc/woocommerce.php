@@ -41,6 +41,12 @@ function picworldtheme_changes()
 						add_theme_support( 'wc-product-gallery-zoom' );
 						add_theme_support( 'wc-product-gallery-lightbox' );
 						add_theme_support( 'wc-product-gallery-slider' );
+
+
+						add_image_size( 'picworldtheme-slider',1920 , 800, array('center','center') );
+
+
+
 					}
 					add_action( 'after_setup_theme', 'picworldtheme_woocommerce_setup' );
 
@@ -280,14 +286,13 @@ function picworldtheme_changes()
 					    return $options;
 					}
 					// ------------------------------
-					function picworldtheme_woocommerce_template_loop_product_galery_img($product)
-					{
-					$attachment_ids =get_gallery_image_ids($product);
-					$firest_imgIid =$attachment_ids[0];
-					$img =get_gallery_image_html($firest_imgIid );
-						echo img;
-					}
-
+					// function picworldtheme_woocommerce_template_loop_product_galery_img($product)
+					// {
+					// $attachment_ids =get_gallery_image_ids($product);
+					// $firest_imgIid =$attachment_ids[0];
+					// $img =get_gallery_image_html($firest_imgIid );
+					// 	echo img;
+					// }
 
 
 					remove_action('woocommerce_after_shop_loop', 'woocommerce_pagination',  10 );
@@ -300,8 +305,51 @@ function picworldtheme_changes()
 						
 					// }
 
+function picworldtheme_get_firest_gallery_image(){
+	// https://stackoverflow.com/questions/27702915/how-to-get-woocommerce-product-gallery-image-urls
+	  global $product;
+    $attachment_ids = $product->get_gallery_image_ids();
+    if(wp_get_attachment_url( $attachment_ids[0] )!= ""){
+ echo ('<li><img src="'. wp_get_attachment_url( $attachment_ids[0] ).'"></img></li>');
+    }
+        
+       // echo ( wp_get_attachment_image( $attachment_ids[0] ));
+  
+}
 
+function picworldtheme_slider_start(){
+	echo '<div class="single-flexslider"> 
+	<ul class="slides">';
+}
+function picworldtheme_slider_thumbnail_wrap_start(){
+	echo '<li>';
+	
+}
+function picworldtheme_slider_thumbnail_wrap_end(){
+	echo '</li>';
+	
+}
+function picworldtheme_slider_end(){
+	echo "	</ul>
+			</div>";
+}
 
+add_action( 'woocommerce_before_shop_loop_item','picworldtheme_slider_start',12);
+add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_thumbnail_wrap_start', 7);
+			// woocommerce_before_shop_loop_item_title, woocommerce_template_loop_product_thumbnail,	10	
+remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash',10);
+add_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash',11);
+add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_thumbnail_wrap_end', 13);
+add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_get_firest_gallery_image', 15);
+add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_end',20);
+
+function picworldtheme_get_copons(){
+	 global $woocommerce;
+    $coupon_data = new WC_Coupon('2uxkvuq2');
+	var_dump( $coupon_data);
+}
+
+// add_action('wp_body_open','picworldtheme_get_copons');
 	// .........................
 }
 add_action('wp','picworldtheme_changes');

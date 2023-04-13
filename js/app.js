@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event){
      const topCategoryManuTogller=document.getElementById('nv1-toggler');
      const dropDowns=Array.from(document.querySelectorAll('.dropMenu'));
      const categoriesCircles =Array.from(document.querySelectorAll('.categories-list  li .img-box img'))
-     let mm=gsap.matchMedia()
+     var   mm=gsap.matchMedia()
    var screenWidth= window.innerWidth;
      var isOpen = false;
     // console.log(topCategoryManuTogller,topCategoryManuOverlay,topCategoryManu)
@@ -37,6 +37,28 @@ document.addEventListener("DOMContentLoaded", function(event){
     //custom GSAP code goes here
     // This tween will rotate an element with a class of .custom-logo
     // let eyeTl=gsap.timeline({repeat:1.5,paused:true,onComplete: stylesReset});
+
+
+         // -------------------------------
+// main page slider 
+  (function ($){
+   $('.flexslider').flexslider({
+      animation: "slide",
+      rtl: true,
+      touch:true,
+      slideshow: false,//stop autosliding
+     
+});
+
+
+   $('.single-flexslider').flexslider({
+animation: "fade"
+});
+
+
+   
+  })(jQuery)
+ 
     let catMenuTl=gsap.timeline({paused:true,onComplete: stylesReset});
 function MenuToggler(){
   catMenuTl.to('#menu-overlay',{right:0})
@@ -114,7 +136,7 @@ categoriesCircles.forEach(circle => {
         start:"top 60%",
         end:"bottom 10%",
         toggleActions:'restart none restart none',
-       markers:true,
+    //   markers:true,
         toggleClass:"circle-inview-position"
     }
   })
@@ -123,6 +145,7 @@ categoriesCircles.forEach(circle => {
 
 }
  )
+
 
 
     // -------------------------------

@@ -14,7 +14,7 @@
 				<?php dynamic_sidebar( 'menu-search' ); ?>
 			<?php endif; ?>	
 
-
+ 
 
 
 <li class="cat-item">

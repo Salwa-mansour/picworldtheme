@@ -6,7 +6,73 @@ get_header();
 
 <main id="primary" class="site-main front-page">
 	<section id="hero">
+			<?php
+				for($i=1;$i<=3;$i++):
 
+					$slider_image_ids[$i]		=get_theme_mod('slide_image'.$i);
+					$slider_button_text[$i]	=get_theme_mod('url_text_setting'.$i);
+					$slider_term_ids[$i]			=get_theme_mod('term_id'.$i);
+				endfor;
+$k=0;
+				
+
+			?>
+		<div class="flexslider" style="direction:rtl">
+			<ul class="slides">
+
+
+				<?php 
+				
+					foreach($slider_term_ids as $term_id ):
+						if ($term_id != null ):
+							
+						$args = array(
+					'taxonomy' 			 => 'product_tag',
+					'term_taxonomy_id'	 => $term_id
+				
+				);
+
+				$thisTag =get_term($term_id,'product_tag');
+				//need to handle error
+				 ?>
+	
+				<li>
+			<figure >
+				<img src="<?php echo esc_url(wp_get_attachment_url( $slider_image_ids[$k])); ?>" 
+					alt="<?php esc_html_e( $thisTag->name, 'picworldtheme' ).esc_attr( 'image', 'picworldtheme' ) ;  ?>" />
+			</figure>
+								
+					
+			<div class="flex-caption">
+	
+					<h1 class="term-name">						
+						<?php esc_html_e( $thisTag->name, 'picworldtheme' ) ;  ?>
+						
+					</h1>
+					<p class="term-desct">
+						<?php  esc_html_e( $thisTag->description, 'picworldtheme' ) ; ?>
+					</p>
+					<a href="<?php echo esc_url( get_term_link($thisTag->slug, 'product_tag')); ?>">
+						
+							<?php esc_html_e( get_theme_mod( 'set_link_text','start shopping')); ?>
+							
+					</a>
+						
+
+			</div><!-- flex-caption-->
+					
+				</li>
+
+				<?php 
+				$k++;
+				endif;
+				wp_reset_query(); 
+				endforeach;
+				$k = 0;
+				 ?>
+				
+			</ul>
+		</div>
 	</section>
 
 		<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
@@ -58,8 +124,10 @@ get_header();
 			</li><!--cat-item-->
 			<?php
 				//    echo '<br /><a href="'. get_term_link($cat->slug, 'product_cat') .'">'. $cat->name .'</a>';
-			endforeach;?>
-
+			endforeach;
+wp_reset_query(); 
+			?>
+		
 
 
 		</ul>
@@ -107,9 +175,7 @@ get_header();
 </div>
 			</li>
 
-		<pre>
-			<?php var_dump($loop) ?>
-		</pre>
+	
 			<?php 
 
 

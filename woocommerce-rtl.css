@@ -567,9 +567,54 @@ p.no-comments {
 	height: 100%;
 }
 /*-----------------========================================--------------*/
+
+#hero
+{
+
+height:550px ;
+max-height:80vh ;
+
+}
+.flexslider{
+	border: none;
+/*	position:relative ;*/
+}
+.flexslider ,
+.flex-viewport,
+.flexslider ul.slides ,
+.flexslider .slides > li,
+.flexslider .slides > li figure{
+	height: 100%;
+	
+}
+.flexslider .slides > li{
+	position: relative;
+}
+figure{
+	margin: 0;
+	width: 100%;
+
+}
+.flexslider figure:after{
+	content: " ";
+position: absolute;
+left: 0;
+top: 0;
+height: 100%;
+width: 100%;
+background-color: hsla(0, 0%, 0%, .1);
+z-index: 5;
+}
+figure img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
 ul.flex-direction-nav {
     position: absolute;
-    top: 30%;
+  top:50% ;
+	transform: translateY(-50%);
     z-index: 99999;
     width: 100%;
     left: 0;
@@ -582,7 +627,7 @@ li.flex-nav-next {float: right;}
 a.flex-next {visibility:hidden;}
 a.flex-prev {visibility:hidden;}
 
-a.flex-next::after {
+.flex-direction-nav a::before {
 	visibility:visible;
 	content: "\f345";
 	font-family: 'dashicons';
@@ -590,7 +635,7 @@ a.flex-next::after {
 	font-size: 20px;   
 	font-weight: bold;
 }
-a.flex-prev::before {
+.flex-direction-nav a.flex-next::before {
     visibility:visible;
      content: "\f341";
 	font-family: 'dashicons';   
@@ -613,6 +658,27 @@ ul.flex-direction-nav li a:hover {
 .woocommerce .woocommerce-breadcrumb *{
 	width:fit-content;
 }
+.flex-caption {
+	position: absolute;
+/*		width: 96%;*/
+/*		padding: 2%;*/
+		left: 10%;
+		bottom: 10%;
+		background:transparent;
+		color: #fff;
+		
+	z-index: 10;
+	
+}
+
+li.css a {
+  border-radius: 0;
+}
+
+.flex-control-nav{
+	bottom:0 ;
+}
+
 /*----------------------------------------*/
 td.product-remove a.remove{
 	display: block;
@@ -636,3 +702,4 @@ td.product-remove a.remove{
 td.actions  *{
    margin: .5rem 0;
 }
+

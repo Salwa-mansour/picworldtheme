@@ -65,7 +65,7 @@
 				<?php dynamic_sidebar( 'menu-search' ); ?>
 			<?php endif; ?>	
 			
-				
+				<?php do_action( 'menu-drop-down' ); ?>
 
 	    </div><!-- #top-menu-bar -->
 		<nav id="site-navigation" class="main-navigation"><!-- this is the category listing menu -->

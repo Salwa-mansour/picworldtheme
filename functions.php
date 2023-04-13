@@ -50,7 +50,11 @@ function picworldtheme_setup() {
 	register_nav_menus(
 		array(
 			'menu-1' => esc_html__( 'Primary', 'picworldtheme' ),
-		)
+		
+			'menu-2' => esc_html__( 'footer', 'picworldtheme' ),
+		),
+
+
 	);
 
 	/*
@@ -144,6 +148,17 @@ function picworldtheme_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'footer-social', 'baketheme' ),
+			'id'            => 'footer-socail-1',
+			'description'   => esc_html__( 'Add soial media block here.', 'baketheme' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s social">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 	
 }
 add_action( 'widgets_init', 'picworldtheme_widgets_init' );
@@ -172,8 +187,15 @@ function picworldtheme_scripts() {
   wp_enqueue_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js', array(), false, true );
   // ScrollTrigger - with gsap.js passed as a dependency
   wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js', array('gsap-js'), false, true );
+
+
+wp_enqueue_script('flex-slider-jqeury',get_template_directory_uri() . '/inc/flexslider/jquery.flexslider.js'
+	,array('jquery'),'',true);
+wp_enqueue_style('flex-slider-css',get_template_directory_uri() . '/inc/flexslider/flexslider.css');
+wp_enqueue_style('flex-slider-css-rtl',get_template_directory_uri() . '/inc/flexslider/flexslider-rtl.css');
+
     // Your animation code file - with gsap.js passed as a dependency
-  wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', array('gsap-js'), false, true );
+  wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', array('gsap-js','flex-slider-jqeury'), false, true );
 }
 
 add_action( 'wp_enqueue_scripts', 'picworldtheme_scripts' );
@@ -203,6 +225,20 @@ require get_template_directory() . '/inc/customizer.php';
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
+}
+if(class_exists( 'WooCommerce' )){
+			add_filter( 'woocommerce_currencies', 'add_cw_currency' );
+		function add_cw_currency( $cw_currency ) {
+		     $cw_currency['newRyial'] = __( 'ريال يمني جديد', 'woocommerce' );
+		     return $cw_currency;
+		}
+		add_filter('woocommerce_currency_symbol', 'add_cw_currency_symbol', 10, 2);
+		function add_cw_currency_symbol( $custom_currency_symbol, $custom_currency ) {
+		     switch( $custom_currency ) {
+		         case 'newRyial': $custom_currency_symbol = 'ريال يمني جديد'; break;
+		     }
+		     return $custom_currency_symbol;
+		}
 }
 
 /**
