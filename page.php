@@ -32,7 +32,10 @@ get_header();
 		?>
 
 	</main><!-- #main -->
+<div id="aside-overlay"></div> 
+<?php
+
+get_sidebar();?>
 
 <?php
-get_sidebar();
 get_footer();

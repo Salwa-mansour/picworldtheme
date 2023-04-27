@@ -47,42 +47,127 @@ function picworldtheme_customize_register( $wp_customize ) {
 	 );
 
 			mainSlide_images_settings($wp_customize);
-				// // fleild 1 link text
-				// $wp_customize->add_setting(
-				// 	'set_link_text',array(
-				// 		'type'				=>'theme_mod',
-				// 		'default'			=>'start shopping',
-				// 		'sanitize_callback'	=>'sanitize_text_field',
+				// -------------------------
+			$wp_customize->add_section(
+		'frontPage_lists_section',array(
+		'title'		  =>	'front page product lists settings',
+		'description' =>	'titles and number of items in each section',
 
-				// 	)
-				// ) ;
-				// $wp_customize->add_control(
-				// 	'set_link_text',array(
-				// 		'label'			=>'link text',
-				// 		'description'	=>'text show for clickable eara',
-				// 		'section'		=>'site_mainSlide_section',
-				// 		'type'			=>'text'
 
-				// 	)
-				// ) ;
-				// // fleild 2 term
-				// $wp_customize->add_setting(
-				// 	'set_tag',array(
-				// 		'type'				=>'theme_mod',
-				// 		'default'			=>' ',
-				// 		'sanitize_callback'	=>'absint',
+		)
+	 );
+			// Freist section 
+				$wp_customize->add_setting(
+					'newest_products_title',array(
+						'type'				=>'theme_mod',
+						'default'			=>'newest products',
+						'sanitize_callback'	=>'sanitize_text_field',
 
-				// 	)
-				// ) ;
-				// $wp_customize->add_control(
-				// 	'set_tag',array(
-				// 		'label'			=>'tag item',
-				// 		'description'	=>'tag for showing items',
-				// 		'section'		=>'site_mainSlide_section',
-				// 		'type'			=>'dropdown_tags'
+					)
+				) ;
+				$wp_customize->add_control(
+					'newest_products_title',array(
+						'label'			=>' title',
+						'description'	=>'newest products section title',
+						'section'		=>'frontPage_lists_section',
+						'type'			=>'text'
 
-				// 	)
-				// ) ;
+					)
+				) ;
+				// fleild 2 term
+				$wp_customize->add_setting(
+					'num_items_newest',array(
+						'type'				=>'theme_mod',
+						'default'			=>'8',
+						'sanitize_callback'	=>'absint',
+
+					)
+				) ;
+				$wp_customize->add_control(
+					'num_items_newest',array(
+						'label'			=>'number of items',
+						'description'	=>'number of procuts to show in newest list',
+						'section'		=>'frontPage_lists_section',
+						'type'			=>'number'
+
+					)
+				) ;
+				// second section 
+						$wp_customize->add_setting(
+							'top_rated_title',array(
+								'type'				=>'theme_mod',
+								'default'			=>'top rated',
+								'sanitize_callback'	=>'sanitize_text_field',
+
+							)
+						) ;
+						$wp_customize->add_control(
+							'top_rated_title',array(
+								'label'			=>' title',
+								'description'	=>'top rated section title',
+								'section'		=>'frontPage_lists_section',
+								'type'			=>'text'
+
+							)
+						) ;
+						// fleild 2 term
+						$wp_customize->add_setting(
+							'num_items_topRated
+							',array(
+								'type'				=>'theme_mod',
+								'default'			=>'4',
+								'sanitize_callback'	=>'absint',
+
+							)
+						) ;
+						$wp_customize->add_control(
+							'num_items_topRated
+							',array(
+								'label'			=>'number of items',
+								'description'	=>'number of procuts to show in top rated list',
+								'section'		=>'frontPage_lists_section',
+								'type'			=>'number'
+
+							)
+						) ;
+					// theird section 
+						$wp_customize->add_setting(
+							'best_selling_title',array(
+								'type'				=>'theme_mod',
+								'default'			=>'best selling',
+								'sanitize_callback'	=>'sanitize_text_field',
+
+							)
+						) ;
+						$wp_customize->add_control(
+							'best_selling_title',array(
+								'label'			=>' title',
+								'description'	=>'best selling section title',
+								'section'		=>'frontPage_lists_section',
+								'type'			=>'text'
+
+							)
+						) ;
+						// fleild 2 term
+						$wp_customize->add_setting(
+							'num_items_bestSelling
+							',array(
+								'type'				=>'theme_mod',
+								'default'			=>'4 ',
+								'sanitize_callback'	=>'absint',
+
+							)
+						) ;
+						$wp_customize->add_control(
+							'num_items_bestSelling
+							',array(
+								'label'			=>'number of items',
+								'description'	=>'number of procuts to show in top best selling',
+								'section'		=>'frontPage_lists_section',
+								'type'			=>'number'
+
+							)
+						) ;
 
 
 
@@ -94,6 +179,7 @@ function my_customize_sanitize_feature_image($input)
     error_log(attachment_url_to_postid($input));//debug
     return attachment_url_to_postid($input);
 }
+
 function mainSlide_images_settings($wp_customize,$k=3){
 
 	for($i=1;$i<=$k;$i++):

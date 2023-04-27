@@ -293,12 +293,37 @@ function picworldtheme_changes()
 					// $img =get_gallery_image_html($firest_imgIid );
 					// 	echo img;
 					// }
+function picworldtheme_filter_link()
+{
+	echo '<div  id="fillter-btn" role="button" rel="filters" ><span>'.esc_html('show fillters').'</span>
+	<svg width="700pt" height="700pt" version="1.1" viewBox="0 -70 700 700" id="filters-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
+ <g>
+ <title>filters by DTE MEDIA from Noun Project (CCBY3.0) </title>
+  <path d="m560 287.84h-29.68c-5.0391 0-8.9609-3.9219-8.9609-8.9609 0-5.0391 3.9219-8.9609 8.9609-8.9609h29.68c5.0391 0 8.9609 3.9219 8.9609 8.9609 0 4.4805-3.9219 8.9609-8.9609 8.9609z"/>
+  <path d="m390.88 287.84h-270.48c-5.0391 0-8.9609-3.9219-8.9609-8.9609 0-5.0391 3.9219-8.9609 8.9609-8.9609h271.04c5.0391 0 8.9609 3.9219 8.9609 8.9609-0.55859 4.4805-4.4766 8.9609-9.5195 8.9609z"/>
+  <path d="m460.32 330.96c-29.121 0-52.078-23.52-52.078-52.078 0-29.121 23.52-52.078 52.078-52.078 29.121 0 52.078 23.52 52.078 52.078 0 28.559-23.52 52.078-52.078 52.078zm0-86.801c-19.039 0-34.16 15.68-34.16 34.16 0 19.039 15.68 34.16 34.16 34.16 19.039 0 34.16-15.68 34.16-34.16 0-18.48-15.121-34.16-34.16-34.16z"/>
+  <path d="m127.12 414.4h29.68c5.0391 0 8.9609-3.9219 8.9609-8.9609s-3.9219-8.9609-8.9609-8.9609h-29.68c-5.0391 0-8.9609 3.9219-8.9609 8.9609 0 5.043 3.918 8.9609 8.9609 8.9609z"/>
+  <path d="m295.68 414.4h271.04c5.0391 0 8.9609-3.9219 8.9609-8.9609s-3.9219-8.9609-8.9609-8.9609l-271.04 0.003907c-5.0391 0-8.9609 3.9219-8.9609 8.9609 0 5.0391 3.9219 8.957 8.9609 8.957z"/>
+  <path d="m174.16 405.44c0-29.121 23.52-52.078 52.078-52.078 29.121 0 52.078 23.52 52.078 52.078 0 29.121-23.52 52.078-52.078 52.078-28.559 0-52.078-23.52-52.078-52.078zm17.918 0c0 19.039 15.68 34.16 34.16 34.16 19.039 0 34.16-15.68 34.16-34.16 0-19.039-15.68-34.16-34.16-34.16-18.477 0-34.16 15.117-34.16 34.16z"/>
+  <path d="m120.4 160.72h29.68c5.0391 0 8.9609-3.9219 8.9609-8.9609 0-5.0391-3.9219-8.9609-8.9609-8.9609l-29.68 0.003906c-5.0391 0-8.9609 3.9219-8.9609 8.9609 0.003906 5.0391 3.9219 8.957 8.9609 8.957z"/>
+  <path d="m288.96 160.72h271.04c5.0391 0 8.9609-3.9219 8.9609-8.9609 0-5.0391-3.9219-8.9609-8.9609-8.9609l-271.04 0.003906c-5.0391 0-8.9609 3.9219-8.9609 8.9609 0 5.0391 3.9219 8.957 8.9609 8.957z"/>
+  <path d="m167.44 151.76c0-29.121 23.52-52.078 52.078-52.078 29.121 0 52.078 23.52 52.078 52.078 0 29.121-23.52 52.078-52.078 52.078-28.559 0.55859-52.078-22.961-52.078-52.078zm17.918 0c0 19.039 15.68 34.16 34.16 34.16 19.039 0 34.16-15.68 34.16-34.16 0-19.039-15.68-34.16-34.16-34.16s-34.16 15.117-34.16 34.16z"/>
+
+ </g>
+</svg>
+</div>';
+}
 
 					remove_action('woocommerce_after_shop_loop', 'woocommerce_pagination',  10 );
-					add_action('woocommerce_before_shop_loop','woocommerce_pagination',10);
+					 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count',  20 );
+					add_action('woocommerce_before_shop_loop', 'picworldtheme_filter_link', 25 );
+					 add_action('woocommerce_before_shop_loop', 'woocommerce_result_count',  35 );
+					add_action('woocommerce_before_shop_loop','woocommerce_pagination',40);
+				
+					if(! is_front_page()):
 					add_action('woocommerce_after_shop_loop_item_title','the_excerpt',1);
-
+					endif;
 					// if(is_shop()){
 
 					// 	add_action("woocommerce_before_shop_loop_item_title","picworldtheme_woocommerce_template_loop_product_galery_img",11,1);
@@ -350,6 +375,7 @@ function picworldtheme_get_copons(){
 }
 
 // add_action('wp_body_open','picworldtheme_get_copons');
+
 	// .........................
 }
 add_action('wp','picworldtheme_changes');

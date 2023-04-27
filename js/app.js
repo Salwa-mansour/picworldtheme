@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", function(event){
      const topCategoryManuOverlay=document.getElementById('menu-overlay');
      const topCategoryManuTogller=document.getElementById('nv1-toggler');
      const dropDowns=Array.from(document.querySelectorAll('.dropMenu'));
-     const categoriesCircles =Array.from(document.querySelectorAll('.categories-list  li .img-box img'))
+     const categoriesCircles =Array.from(document.querySelectorAll('.categories-list  li .img-box img'));
+     const filterBtn=document.getElementById('fillter-btn');
+     const filterOverlay=document.getElementById('aside-overlay');
+     console.log(filterBtn);
      var   mm=gsap.matchMedia()
    var screenWidth= window.innerWidth;
      var isOpen = false;
@@ -46,20 +49,36 @@ document.addEventListener("DOMContentLoaded", function(event){
       animation: "slide",
       rtl: true,
       touch:true,
-      slideshow: false,//stop autosliding
-     
+     pauseOnAction:true,
+     pauseOnHover:true,
 });
 
 
    $('.single-flexslider').flexslider({
-animation: "fade"
+animation: "fade",
+directionNav:false,
+controlNav:false,
+touch:true,
+slideshowSpeed:3000,
 });
 
+
+$('.product-group1').flexslider({
+animation: "slide",
+
+itemWidth: 300,
+itemMargin: 5,
+directionNav:true,
+controlNav:false,
+selector:".product-group1-prodcuts >li",
+// slideshow:false,
+});
 
    
   })(jQuery)
  
     let catMenuTl=gsap.timeline({paused:true,onComplete: stylesReset});
+    let filterTl=gsap.timeline({paused:true});
 function MenuToggler(){
   catMenuTl.to('#menu-overlay',{right:0})
             .to('#categories-navigation',{right:0})
@@ -69,9 +88,17 @@ function MenuToggler(){
             .to('.line3',{y:-10.5,rotation:-45},'stamp')
 
 }
+MenuToggler()
+function filtersToggler(){
+  filterTl.to('#aside-overlay',{left:0})
+         .to('#secondary',{left:0})
+           
+
+}
+filtersToggler()
 function stylesReset(){
   //gsap.set(catMenuTl.targets(), { clearProps: "all" });
-  console.log('cleard')
+ // console.log('cleard')
 }
 function toggleMenu() {
      isOpen = !isOpen;
@@ -87,10 +114,35 @@ function toggleMenu() {
             document.body.style.overflow = 'scroll';
         }
 }
-MenuToggler()
+
 
 
 topCategoryManuTogller.addEventListener("click",toggleMenu);
+
+function toggleFiltersOn() {
+     // isOpen = !isOpen;
+
+     //    if (isOpen) {
+            filterTl.restart()
+            document.body.style.overflow = 'hidden';
+        // } else {
+        //     filterTl.timeScale(3).reverse()
+        //     //get red of inline styles
+        //     setTimeout(() => { filterTl.revert();console.log('cleard') }, 500)
+            
+        //     document.body.style.overflow = 'scroll';
+        // }
+}
+
+function toggleFiltersOff(){
+         filterTl.timeScale(3).reverse()
+            //get red of inline styles
+            setTimeout(() => { filterTl.revert();console.log('cleard') }, 500)
+            
+            document.body.style.overflow = 'scroll';
+}
+
+filterBtn.addEventListener("click",toggleFiltersOn);
 
 
 
@@ -98,10 +150,12 @@ topCategoryManuTogller.addEventListener("click",toggleMenu);
    
  
         catMenuTl.revert()
+        filterTl.revert()
         document.body.style.overflow = 'scroll';
     })
 
 topCategoryManuOverlay.addEventListener("click",toggleMenu)
+filterOverlay.addEventListener("click",toggleFiltersOff)
 
 // dropDowns.forEach((item)=>
 // {
@@ -144,8 +198,7 @@ categoriesCircles.forEach(circle => {
 
 
 }
- )
-
+ );
 
 
     // -------------------------------

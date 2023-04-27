@@ -82,12 +82,18 @@
 			
 			<ul id="cart-nav">
 <!-- cart login account -->
-			<li class="page-item cart-item">
-					<a href="<?php echo wc_get_cart_url(); ?>">
+			<!-- <li class="page-item cart-item"> -->
+					<!-- <a href="<?php //echo wc_get_cart_url(); ?>">
 						<span class="dashicons dashicons-cart"></span>
-						<span class="items-count"><?php echo  WC()->cart->get_cart_contents_count(); ?></span>
-					</a>
-					</li>	
+						<span class="items-count"><?php //echo  WC()->cart->get_cart_contents_count(); ?></span>
+					</a> -->
+						 <!-- cart widget -->
+			<?php if ( is_active_sidebar( 'header-cart' ) ) : ?>	
+				<?php dynamic_sidebar( 'header-cart' ); ?>
+			<?php endif; ?>	
+			
+				<?php do_action( 'menu-drop-down' ); ?>
+					<!-- </li>	 -->
 					<?php if( is_user_logged_in()): ?>
 						<li>
 					<a href="<?php echo esc_url(get_permalink( get_option( 'woocommerce_myaccount_page_id' ))); ?>" title="<?php esc_html_e('my account'); ?>">
@@ -108,5 +114,5 @@
 			
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
-	<div class="main-container <?php is_front_page() &&  is_home() == 1?"dfs":"" ;  ?> ">
+	<div class="<?php esc_attr_e("main-container"); ?>" >
 

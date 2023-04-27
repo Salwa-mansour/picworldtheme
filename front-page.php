@@ -13,7 +13,7 @@ get_header();
 					$slider_button_text[$i]	=get_theme_mod('url_text_setting'.$i);
 					$slider_term_ids[$i]			=get_theme_mod('term_id'.$i);
 				endfor;
-$k=0;
+$k=1;
 				
 
 			?>
@@ -34,33 +34,45 @@ $k=0;
 
 				$thisTag =get_term($term_id,'product_tag');
 				//need to handle error
+			
 				 ?>
 	
 				<li>
 			<figure >
 				<img src="<?php echo esc_url(wp_get_attachment_url( $slider_image_ids[$k])); ?>" 
-					alt="<?php esc_html_e( $thisTag->name, 'picworldtheme' ).esc_attr( 'image', 'picworldtheme' ) ;  ?>" />
+					 />
 			</figure>
 								
 					
-			<div class="flex-caption">
-	
-					<h1 class="term-name">						
-						<?php esc_html_e( $thisTag->name, 'picworldtheme' ) ;  ?>
-						
-					</h1>
-					<p class="term-desct">
-						<?php  esc_html_e( $thisTag->description, 'picworldtheme' ) ; ?>
-					</p>
-					<a href="<?php echo esc_url( get_term_link($thisTag->slug, 'product_tag')); ?>">
-						
-							<?php esc_html_e( get_theme_mod( 'set_link_text','start shopping')); ?>
+			<?php if(!empty($thisTag) && !is_wp_error($thisTag)): ?>	
+				<div class="flex-caption">
+		
+						<h1 class="term-name">						
+							<?php esc_html_e( $thisTag->name, 'picworldtheme' ) ;  ?>
 							
-					</a>
-						
+						</h1>
+						<p class="term-desct">
+							<?php  esc_html_e( $thisTag->description, 'picworldtheme' ) ; ?>
+						</p>
+						<a href="<?php echo esc_url( get_term_link($thisTag->slug, 'product_tag')); ?>">
+							
+								<?php esc_html_e( get_theme_mod( 'set_link_text','start shopping')); ?>
+								
+						</a>
+							
 
-			</div><!-- flex-caption-->
+				</div><!-- flex-caption-->
 					
+			<?php else:?>	
+				<div class="flex-caption">
+		
+				<h1 class="error">
+					<?php esc_html_e('tag not found','picworldtheme') ?>
+					
+				</h1>
+			</div>
+			<?php endif;//(!empty($thisTag) && !is_wp_error($thisTag)): ?>		
+		
 				</li>
 
 				<?php 
@@ -68,7 +80,7 @@ $k=0;
 				endif;
 				wp_reset_query(); 
 				endforeach;
-				$k = 0;
+				$k = 1;
 				 ?>
 				
 			</ul>
@@ -136,22 +148,22 @@ wp_reset_query();
 </section>
 
 <?php endif;//if ( class_exists( 'WooCommerce' ) ) : ?>
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-<section id="trending">
+
+
 	<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 	<?php if ( class_exists( 'WooCommerce' ) ) : ?>
 
   <section class=" front-section">
 
-	<div class="content best-selling">
-		<h3>best selling products</h3>
-		<ul class="best-selling-prodcuts">
+	<div class="content product-group1">
+		<h1><?php esc_html_e( get_theme_mod( 'newest_products_title','newest products')); ?></h1>
+		<ul class="product-group1-prodcuts">
 			<?php
 			$args = array(
 				'post_type' => 'product',
-				'meta_key' => 'total_sales',
-				'orderby' => 'meta_value_num',
-				'posts_per_page' => 1,
+				 'orderby' => 'date',
+              	 'order'   => 'DESC',
+				 'posts_per_page' => get_theme_mod('num_items_newest',8),
 			);
 
 			$loop = new WP_Query( $args );
@@ -189,19 +201,27 @@ wp_reset_query();
 
 <?php endif;//if ( class_exists( 'WooCommerce' ) ) : ?>
 
-	</section>
+
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 	<section id="sales">
 <?php //do_action( 'picworldtheme_get_sale_product' ); ?>	
 
 	</section>
 
-	<section id="follow-discount-1">
-
+	<section class="front-section">
+		<h1><?php esc_html_e( get_theme_mod( 'top_rated_title','top rated title')); ?></h1>
+		<div>
+			<?php echo do_shortcode( '[product limit="'.get_theme_mod("num_items_topRated",4).'" columns="4" orderby"rating "]', $ignore_html = false ); ?>
+		</div>
 	</section>
 
-	<section id="follow-discount-2">
-
+	<section id="product-group2" class="front-section">
+		<h1><?php esc_html_e( get_theme_mod( 'best_selling_title','best selling products')); ?></h1>
+		<div>
+			<!-- 'meta_key' => 'total_sales',
+						'orderby' => 'meta_value_num', -->
+			<?php echo do_shortcode( '[products limit="'.get_theme_mod("num_items_bestSelling",4).'" columns="4" orderby="popularity " ]', $ignore_html = false); ?>
+		</div>
 	</section>
 
 	

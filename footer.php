@@ -27,23 +27,32 @@
 						<?php	esc_html_e( bloginfo( 'description' ) ,'picworldtheme'); ?>
 						</p>
 				</div><!-- .logo-container -->
-		<?php if ( has_nav_menu( 'menu-2' ) )  ?>	
-<h3>title</h3>
-			<?php wp_nav_menu(
-				array(
-					'theme_location' => 'menu-2',
-					'menu_id'        => 'footer-menu',
-				)); ?>
+				<?php if ( has_nav_menu( 'menu-2' ) )  ?>	
+				<div>
+				
+						<?php	if (is_active_sidebar( 'footer-title' ) ) ?>
+						
+						<?php	dynamic_sidebar( 'footer-title' );?>
+					
+						<?php wp_nav_menu(
+						array(
+							'theme_location' => 'menu-2',
+							'menu_id'        => 'footer-menu',
+						)); ?>
+					
+
+				</div>
+					
+
+<div>
+	<?php	if (is_active_sidebar( 'footer-socail-1' ) ) ?>
 			
-
-
-
-			
-		<?php	if (is_active_sidebar( 'footer-socail-1' ) ) ?>
-				<h3>title</h3>
 			<?php	dynamic_sidebar( 'footer-socail-1' );?>
 			
 			
+</div>
+			
+		
 			
 				
 			

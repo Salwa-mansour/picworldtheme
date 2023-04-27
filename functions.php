@@ -159,6 +159,22 @@ function picworldtheme_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'header-cart', 'baketheme' ),
+			'id'            => 'header-cart',
+			'description'   => esc_html__( 'add woocommerce mini cart wedget here', 'baketheme' ),
+			
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'footerTitle', 'baketheme' ),
+			'id'            => 'footer-title',
+			'description'   => esc_html__( 'add title to footer menu', 'baketheme' ),
+			
+		)
+	);
 	
 }
 add_action( 'widgets_init', 'picworldtheme_widgets_init' );

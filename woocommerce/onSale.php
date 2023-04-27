@@ -13,4 +13,3 @@ echo $onSale;
 		endforeach;
 
 ?>
-<h1>dsfsdfsd</h1>
