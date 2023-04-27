@@ -389,7 +389,7 @@ p.stars.selected a:not(.active)::before {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	text-align: left;
+	text-align: right;
 }
 
 .woocommerce-tabs ul.tabs li {
