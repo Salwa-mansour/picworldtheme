@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event){
   (function ($){
    $('.flexslider').flexslider({
       animation: "slide",
-      rtl: true,
+     
       touch:true,
      pauseOnAction:true,
      pauseOnHover:true,
@@ -141,9 +141,11 @@ function toggleFiltersOff(){
             
             document.body.style.overflow = 'scroll';
 }
+if (filterBtn!=null) {
+  filterBtn.addEventListener("click",toggleFiltersOn);
 
-filterBtn.addEventListener("click",toggleFiltersOn);
-
+  
+}
 
 
    window.addEventListener("resize", () => {
@@ -155,7 +157,10 @@ filterBtn.addEventListener("click",toggleFiltersOn);
     })
 
 topCategoryManuOverlay.addEventListener("click",toggleMenu)
-filterOverlay.addEventListener("click",toggleFiltersOff)
+if (filterOverlay!=null) {
+   filterOverlay.addEventListener("click",toggleFiltersOff) 
+}
+
 
 // dropDowns.forEach((item)=>
 // {
@@ -200,6 +205,43 @@ categoriesCircles.forEach(circle => {
 }
  );
 
+let imgflip=document.querySelector('#img-flepper #img-container figure img');
+if(imgflip!= null){
+    gsap.to('#flip-after',{
+    width:imgflip.clientWidth,
+    durtation:.1,
+    scrollTrigger:{
+        trigger:'#img-flepper',
+        toggleActions:'restart none restart none',
+      //  markers:true,
+        scrub:true,
+       start:`top+=200 bottom`,
+      end:"center center",
+    }
+})
+}
+
+
+// gsap.to('#flip-befor',{
+//      width:0,
+//      durtation:.1,
+//     scrollTrigger:{
+//         trigger:'#img-flepper',
+//         toggleActions:'restart none restart none',
+//        //  markers:true,
+//         scrub:true,       
+//        start:`top+=200 bottom`,
+//       end:"center center",
+//     }
+// })
+
+
+
+let addressLink=document.querySelector('.woocommerce-MyAccount-navigation-link--edit-address a')
+if (addressLink!=null) {
+if(addressLink.innerText==""){
+    addressLink.innerText="العنوان"
+}}
 
     // -------------------------------
   }, false);

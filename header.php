@@ -23,25 +23,14 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'picworldtheme' ); ?></a>
+	
 
 	<header id="masthead" class="site-header">
 		<div id="top-menu-bar">
 				<div class="site-branding">
-		
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php esc_attr( bloginfo( 'name' ) ) ; ?>" >
-						
-						<?php	the_custom_logo();?>
-				
-						
-					</a>
-						<?php
+							
+						<?php	the_custom_logo();?>			
 					
-					// $picworldtheme_description = get_bloginfo( 'description', 'display' );
-					// if ( $picworldtheme_description || is_customize_preview() ) :
-						?>
-						<!-- <p class="site-description"><?php //echo $picworldtheme_description;  ?></p> -->
-					<?php // endif; ?>
 				</div><!-- .site-branding -->
 				
 			<?php if ( has_nav_menu( 'menu-1' ) ) : ?>	
@@ -100,14 +89,26 @@
 					<span class="dashicons dashicons-admin-users"></span></a>
 					</li>
 						<li>
-						<a href="<?php echo esc_url( wp_logout_url( get_permalink(get_option( 'woocommerce_myaccount_page_id' )) )); ?>" title="<?php esc_html_e('logout'); ?>" >
+						<a href="<?php echo esc_url( wp_logout_url( home_url())); ?>" title="<?php esc_html_e('logout'); ?>" >
 						<span class="dashicons dashicons-exit"></span></a>
 						</li>
 					<?php else: ?>
-					<li>
-					<a href="<?php echo esc_url(get_permalink( get_option( 'woocommerce_myaccount_page_id' ))); ?>">
-					<?php esc_html_e('login/register'); ?></a>
-					</li>
+							<?php if ( get_option( 'users_can_register' ) ) : ?>
+								
+							<li>
+								<a href="<?php echo wp_login_url(); ?>">
+								<?php esc_html_e('login'); ?>
+									
+								</a>
+							</li>
+							<li>
+								<a href="<?php echo esc_url( site_url('/wp-login.php?action=register&redirect_to=' . get_permalink())
+); ?>">
+								<?php esc_html_e('register'); ?>
+									
+								</a>
+							</li>
+							<?php endif//if ( get_option( 'users_can_register' ) ) : ?>
 					<?php  endif; ?>
 								
 		</ul>

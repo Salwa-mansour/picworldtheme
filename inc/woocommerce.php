@@ -303,6 +303,12 @@ function picworldtheme_slider_end(){
 	echo "	</ul>
 			</div>";
 }
+function picworldtheme_price_container_start(){
+	echo '<div class="price-contaienr">';
+}
+function picworldtheme_price_container_end(){
+	echo '</div ><!--class="price-contaienr"-->';
+}
 
 add_action( 'woocommerce_before_shop_loop_item','picworldtheme_slider_start',12);
 add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_thumbnail_wrap_start', 7);
@@ -314,15 +320,40 @@ add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_thum
 add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_get_firest_gallery_image', 15);
 add_action( 'woocommerce_before_shop_loop_item_title','picworldtheme_slider_end',20);
 
-// remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating',6);
-remove_action ('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+ remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price',10);
+ remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating',10);
 
+add_action('woocommerce_after_shop_loop_item','picworldtheme_price_container_start',6);
+add_action('woocommerce_after_shop_loop_item','woocommerce_template_loop_price',7);
+add_action('woocommerce_after_shop_loop_item','picworldtheme_price_container_end',13);
 function picworldtheme_get_copons(){
 	 global $woocommerce;
     $coupon_data = new WC_Coupon('2uxkvuq2');
 	var_dump( $coupon_data);
 }
 
-// add_action('wp_body_open','picworldtheme_get_copons');
+function picworldtheme_add_shop_aside_overlay(){
+	echo('<div id="aside-overlay"></div> ');
+}
+add_action('woocommerce_sidebar' ,'picworldtheme_add_shop_aside_overlay',5);
 
-	// .........................
+
+// add_action('wp_body_open','picworldtheme_get_copons');
+//  if (!is_archive() || !is_taxonomy('product_cat') ) {
+// remove_action( 'woocommerce_sidebar','woocommerce_get_sidebar',10 );
+
+
+// }
+// 	
+
+add_filter( 'body_class', 'picwoldtheme_body_class' );
+function picwoldtheme_body_class( $classes ) {
+
+    if ( is_account_page() ) {
+        $classes[] = 'account-page';
+        
+    }
+
+ 
+    return $classes;
+}

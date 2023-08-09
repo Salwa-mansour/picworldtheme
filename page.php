@@ -34,8 +34,9 @@ get_header();
 	</main><!-- #main -->
 <div id="aside-overlay"></div> 
 <?php
-
-get_sidebar();?>
-
+if ( !is_front_page() && is_home()  ) {
+get_sidebar();
+}
+?>
 <?php
 get_footer();

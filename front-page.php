@@ -17,7 +17,7 @@ $k=1;
 				
 
 			?>
-		<div class="flexslider" style="direction:rtl">
+		<div class="flexslider" >
 			<ul class="slides">
 
 
@@ -28,7 +28,7 @@ $k=1;
 							
 						$args = array(
 					'taxonomy' 			 => 'product_tag',
-					'term_taxonomy_id'	 => $term_id
+					'term_taxonomy_id'	 =>esc_attr($term_id) 
 				
 				);
 
@@ -86,7 +86,29 @@ $k=1;
 			</ul>
 		</div>
 	</section>
+<section id="img-flepper" class="front-section">
+		<?php for($i=1;$i<=2;$i++):
+	$flipper_image_ids[$i]		=get_theme_mod('flipper_image'.$i);
+		 endfor; ?>
 
+	<div id="img-container">
+		
+		<figure id="flip-after">
+			<img src="<?php echo esc_url(wp_get_attachment_url( $flipper_image_ids[2])); ?> ">
+			
+		</figure>
+		<figure id="flip-befor">
+			<img src="<?php echo esc_url(wp_get_attachment_url( $flipper_image_ids[1])); ?>">
+		</figure>
+	</div>	
+	<div class="text-contianer">
+		<h1><?php esc_html_e( get_theme_mod( 'image_flipper_title','dramatic change')); ?></h1>
+		<p><?php esc_html_e( get_theme_mod( 'image_flipper_description','	Lorem ipsum dolor sit amet
+		 consectetur adipisicing elit. Reprehenderit maiores corrupti expedita id veniam porro atque,
+		  ut placeat officia modi.')); ?>
+		</p>
+	</div>
+</section>
 		<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 		<?php if ( class_exists( 'WooCommerce' ) ) : ?>
 
@@ -119,12 +141,12 @@ $k=1;
 				//    print_r($cat_data);
 				?>
 			<li class="cat-item ">
-				<a href="<?php echo get_term_link($cat->slug, 'product_cat'); ?> " class=" <?php esc_attr_e( 'img-box' )?>">
+				<a href="<?php echo esc_url(get_term_link($cat->slug, 'product_cat')) ; ?> " class=" <?php esc_attr_e( 'img-box' )?>">
 						<img src="<?php echo($image) ; ?>" alt="<?php esc_html_e('catigoury image'); ?>" class="cat-img">
 				 </a>
 					<div class="center-text">
-						<h1 class="cat-name"><?php echo$cat_data->name; ?></h1>
-						<p class="cat-description"><?php echo($cat_data -> description) ?></p>
+						<h1 class="cat-name"><?php echo esc_html_e($cat_data->name) ; ?></h1>
+						<p class="cat-description"><?php echo esc_html_e($cat_data -> description) ?></p>
 						
 					
 					</div>
@@ -155,7 +177,7 @@ wp_reset_query();
 
   <section class=" front-section">
 
-	<div class="content product-group1">
+	<div class="content product-group1" >
 		<h1><?php esc_html_e( get_theme_mod( 'newest_products_title','newest products')); ?></h1>
 		<ul class="product-group1-prodcuts">
 			<?php
@@ -163,7 +185,7 @@ wp_reset_query();
 				'post_type' => 'product',
 				 'orderby' => 'date',
               	 'order'   => 'DESC',
-				 'posts_per_page' => get_theme_mod('num_items_newest',8),
+				 'posts_per_page' =>esc_attr( get_theme_mod('num_items_newest',8)),
 			);
 
 			$loop = new WP_Query( $args );
@@ -181,7 +203,7 @@ wp_reset_query();
 
 <div class="info">
 	<p>
-		<?php esc_html(  the_title(),'picworldtheme' );  ?>	
+		<?php the_title();  ?>	
 	</p>
 
 </div>
@@ -203,15 +225,13 @@ wp_reset_query();
 
 
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-	<section id="sales">
+	<section id="group-3" class="front-section"  style="background-image: url('<?php echo(esc_url( get_template_directory_uri( )).'/inc/starsBackground(1).jpg') ?>;)'">
 <?php //do_action( 'picworldtheme_get_sale_product' ); ?>	
 
-	</section>
-
-	<section class="front-section">
+	
 		<h1><?php esc_html_e( get_theme_mod( 'top_rated_title','top rated title')); ?></h1>
 		<div>
-			<?php echo do_shortcode( '[product limit="'.get_theme_mod("num_items_topRated",4).'" columns="4" orderby"rating "]', $ignore_html = false ); ?>
+			<?php echo do_shortcode( '[products limit="'.esc_attr( get_theme_mod("num_items_topRated",4)).'" columns="4"  orderby"rating "]', $ignore_html = false ); ?>
 		</div>
 	</section>
 
@@ -220,18 +240,12 @@ wp_reset_query();
 		<div>
 			<!-- 'meta_key' => 'total_sales',
 						'orderby' => 'meta_value_num', -->
-			<?php echo do_shortcode( '[products limit="'.get_theme_mod("num_items_bestSelling",4).'" columns="4" orderby="popularity " ]', $ignore_html = false); ?>
+			<?php echo do_shortcode( '[products limit="'.esc_attr( get_theme_mod("num_items_bestSelling",4)).'" columns="4" orderby="popularity" ]', $ignore_html = false); ?>
 		</div>
 	</section>
 
 	
-	<section id="spetual-offers-slider">
-
-	</section>
-	<!-- ------------- pobup wedgets------------- -->
-	<div id="side-discount"></div>
-	<div id="start-discount"></div>
-	<!-- ------------- // pobup wedgets------------- -->
+	
 </main><!-- #main -->
 
 <?php

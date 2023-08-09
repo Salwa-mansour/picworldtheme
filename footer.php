@@ -17,29 +17,27 @@
 			<div class="countact-info">
 		
 				<div class="logo-container">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php esc_attr( bloginfo( 'name' ) ) ; ?>" >
-								
+							
 								<?php	the_custom_logo();?>
-				
 						
-						</a>	
 						<p>
 						<?php	esc_html_e( bloginfo( 'description' ) ,'picworldtheme'); ?>
 						</p>
 				</div><!-- .logo-container -->
-				<?php if ( has_nav_menu( 'menu-2' ) )  ?>	
+					
 				<div>
 				
-						<?php	if (is_active_sidebar( 'footer-title' ) ) ?>
+						<?php	if (is_active_sidebar( 'footer-title' ) ): ?>
 						
 						<?php	dynamic_sidebar( 'footer-title' );?>
-					
+					<?php endif; ?>
+					<?php if ( has_nav_menu( 'menu-2' ) ):  ?>
 						<?php wp_nav_menu(
 						array(
 							'theme_location' => 'menu-2',
 							'menu_id'        => 'footer-menu',
 						)); ?>
-					
+					<?php endif; ?>
 
 				</div>
 					
@@ -63,7 +61,7 @@
 			<div class="copy-rights">
 				<p>
 					<span> <?php esc_html_e( '&#169;حقوق الطبع محفوظة لدى', 'picworldtheme' ) ?> </span>
-					<span><?php esc_html(  the_time('Y') ); ?></span>
+					<bdi><?php esc_html(  the_time('Y') ); ?></bdi>
 					<a href="<?php esc_url(bloginfo( 'url' )) ?> "> <?php esc_html(bloginfo( 'name' )) ?> </a>
 
 				</p>	

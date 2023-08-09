@@ -17,26 +17,37 @@
 function picworldtheme_customize_register( $wp_customize ) {
 
 
-	// $wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-	// $wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-	// $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+	// login img control 
+	$wp_customize->add_section(
+		'login_background_image',array(
+		'title'		  =>	'login and register background image',
+		'description' =>	'login and register background image',
 
-	// if ( isset( $wp_customize->selective_refresh ) ) {
-	// 	$wp_customize->selective_refresh->add_partial(
-	// 		'blogname',
-	// 		array(
-	// 			'selector'        => '.site-title a',
-	// 			'render_callback' => 'picworldtheme_customize_partial_blogname',
-	// 		)
-	// 	);
-	// 	$wp_customize->selective_refresh->add_partial(
-	// 		'blogdescription',
-	// 		array(
-	// 			'selector'        => '.site-description',
-	// 			'render_callback' => 'picworldtheme_customize_partial_blogdescription',
-	// 		)
-	// 	);
-	// }
+
+		)
+	 );
+
+				$wp_customize->add_setting(
+					'login_image',array(
+						'type'				=>'theme_mod',
+						
+						'sanitize_callback'	=>'my_customize_sanitize_feature_image',
+
+					)
+				) ;
+				
+				$wp_customize->add_control(
+				new WP_Customize_Image_Control(
+					$wp_customize, 'login_image', array(
+						'label'    => 'login Image ',
+						'settings' => 'login_image',
+						'section'  => 'login_background_image',
+						
+					)
+				)
+			);
+
+
 		$wp_customize->add_section(
 		'site_mainSlide_section',array(
 		'title'		  =>	'main slider settings',
@@ -48,6 +59,54 @@ function picworldtheme_customize_register( $wp_customize ) {
 
 			mainSlide_images_settings($wp_customize);
 				// -------------------------
+		$wp_customize->add_section(
+		'image_fliper_section',array(
+		'title'		  =>	'image flipper settings',
+		'description' =>	'but items for image flipper',
+
+
+		)
+	 );
+
+			image_fliper_images_settings($wp_customize);
+			// Freist section 
+				$wp_customize->add_setting(
+					'image_flipper_title',array(
+						'type'				=>'theme_mod',
+						'default'			=>'daramatice changes',
+						'sanitize_callback'	=>'sanitize_text_field',
+
+					)
+				) ;
+				$wp_customize->add_control(
+					'image_flipper_title',array(
+						'label'			=>' title',
+						'description'	=>'image flipper section title',
+						'section'		=>'image_fliper_section',
+						'type'			=>'text',
+						'priority'      => '30',
+					)
+				) ;
+				// second section 
+				$wp_customize->add_setting(
+					'image_flipper_description',array(
+						'type'				=>'theme_mod',
+						'default'			=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit maiores 
+												corrupti expedita id veniam porro atque, ut placeat officia modi',
+						'sanitize_callback'	=>'sanitize_text_field',
+
+					)
+				) ;
+				$wp_customize->add_control(
+					'image_flipper_description',array(
+						'label'			=>' description',
+						'description'	=>'image flipper section description',
+						'section'		=>'image_fliper_section',
+						'type'			=>'text',
+						'priority'      => '40',
+					)
+				) ;
+				// -------------------------
 			$wp_customize->add_section(
 		'frontPage_lists_section',array(
 		'title'		  =>	'front page product lists settings',
@@ -56,7 +115,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 
 		)
 	 );
-			// Freist section 
+			
+				// Freist section 
 				$wp_customize->add_setting(
 					'newest_products_title',array(
 						'type'				=>'theme_mod',
@@ -112,8 +172,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 						) ;
 						// fleild 2 term
 						$wp_customize->add_setting(
-							'num_items_topRated
-							',array(
+							'num_items_topRated'
+							,array(
 								'type'				=>'theme_mod',
 								'default'			=>'4',
 								'sanitize_callback'	=>'absint',
@@ -121,8 +181,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 							)
 						) ;
 						$wp_customize->add_control(
-							'num_items_topRated
-							',array(
+							'num_items_topRated'
+							,array(
 								'label'			=>'number of items',
 								'description'	=>'number of procuts to show in top rated list',
 								'section'		=>'frontPage_lists_section',
@@ -180,6 +240,28 @@ function my_customize_sanitize_feature_image($input)
     return attachment_url_to_postid($input);
 }
 
+function image_fliper_images_settings($wp_customize,$k=2){
+
+	for($i=1;$i<=$k;$i++):
+			//adding setting 
+			$wp_customize->add_setting('flipper_image'.$i, array(
+				'default' => '',
+				'type' => 'theme_mod',
+				'sanitize_callback' => 'my_customize_sanitize_feature_image',
+			));
+
+			$wp_customize->add_control(
+				new WP_Customize_Image_Control(
+					$wp_customize, 'my_flipper_image'.$i, array(
+						'label'    => 'flipper Image '.$i,
+						'settings' => 'flipper_image'.$i,
+						'section'  => 'image_fliper_section',
+						'priority' => $i.'0',
+					)
+				)
+			);
+		endfor;
+		}
 function mainSlide_images_settings($wp_customize,$k=3){
 
 	for($i=1;$i<=$k;$i++):

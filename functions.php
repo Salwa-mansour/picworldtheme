@@ -19,6 +19,9 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
+$textdomain='picworldtheme';
+
+
 function picworldtheme_setup() {
 	/*
 		* Make theme available for translation.
@@ -26,7 +29,8 @@ function picworldtheme_setup() {
 		* If you're building a theme based on picworld, use a find and replace
 		* to change 'picworldtheme' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'picworldtheme', get_template_directory() . '/languages' );
+	load_theme_textdomain( $textdomain,get_stylesheet_directory() . '/languages/' );//to add text domain to chiled thems
+	load_theme_textdomain( $textdomain, get_template_directory() . '/languages/' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -189,7 +193,7 @@ function picworldtheme_scripts() {
 	wp_enqueue_style( 'picworldtheme-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_style( 'picworldtheme-font', "https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap" );
 	wp_enqueue_style('dashicons');
-	wp_style_add_data( 'picworldtheme-style', 'rtl', 'replace' );
+	// wp_style_add_data( 'picworldtheme-style', 'rtl', 'replace' );
 
 
 
@@ -242,6 +246,73 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+// -------------------------------	
+add_filter( 'login_display_language_dropdown', '__return_false' );
+function picworldtheme_filter_login_head() {
+
+	if ( has_custom_logo() ) :
+
+		$image = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+		?>
+		<style type="text/css">
+			.login h1 a {
+				background-image: url(<?php echo esc_url( $image[0] ); ?>);
+				-webkit-background-size: <?php echo absint( $image[1] )?>px;
+				background-size:contain;
+				height: 100px;
+				width:auto;
+			}
+		</style>
+		<?php
+	endif;
+
+
+$login_image = wp_get_attachment_image_src( get_theme_mod( 'login_image' ), 'full' );
+if (isset($login_image)) :
+	?>
+
+	<style type="text/css">
+			body.login  {
+				background-image:linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0,0)),
+				 url(<?php echo esc_url( $login_image[0] ); ?>);
+				
+			}
+		</style>
+
+	<?php
+	
+endif;
+
+}
+
+add_action( 'login_head', 'picworldtheme_filter_login_head', 100 );
+function picworldtheme_login_logo_url() {
+    return home_url();
+}
+add_filter( 'login_headerurl', 'picworldtheme_login_logo_url' );
+
+function picworldtheme_login_logo_url_title() {
+	$headertext = esc_html__(get_bloginfo('name') , 'picworldtheme' );
+	return $headertext;
+    
+}
+add_filter( 'login_headertext', 'picworldtheme_login_logo_url_title' );
+
+function picworldtheme_login_stylesheet() {
+    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/inc/style-login.css' );
+    // wp_enqueue_script( 'custom-login', get_stylesheet_directory_uri() . '/style-login.js' );
+}
+add_action( 'login_enqueue_scripts', 'picworldtheme_login_stylesheet' );
+// --------------------------------------
+function custom_login_redirect() {
+
+return 'home_url()';
+
+}
+
+//add_filter('login_redirect', 'custom_login_redirect');
+
 if(class_exists( 'WooCommerce' )){
 			add_filter( 'woocommerce_currencies', 'add_cw_currency' );
 		function add_cw_currency( $cw_currency ) {
