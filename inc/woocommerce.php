@@ -53,8 +53,7 @@
 					 * @return void
 					 */
 					function picworldtheme_woocommerce_scripts() {
-						wp_enqueue_style( 'picworldtheme-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array(), _S_VERSION );
-							wp_enqueue_style( 'picworldtheme-woocommerce-style-rtl', get_template_directory_uri() . '/woocommerce-rtl.css', array(), _S_VERSION );
+					
 
 						$font_path   = WC()->plugin_url() . '/assets/fonts/';
 						$inline_font = '@font-face {

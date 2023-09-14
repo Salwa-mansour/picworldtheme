@@ -1,0 +1,58 @@
+:root{
+	/* --main-decor-color:hsl(0, 36%, 74%);
+	--main-color:#222; */
+	--main-color:hsl(225, 98%, 16%);
+	--main-decor-color:hsl(0, 0%, 85%);
+	--secondary-color:hsl(0, 0%, 33%);
+	--light-color:hsl(0, 0%, 100%);
+	--main-margin:3vw;
+
+}
+
+body.login {
+  padding:2rem ;
+  background-size:120% ;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+#login{
+	background-color: rgba(0, 0, 0, .5);
+	color: white;
+	margin-top:5vh ;
+	padding-bottom: 5vh;
+}
+.login form .input, .login form input[type="checkbox"], .login input[type="text"]{
+	background-color: rgba(0, 0, 0, .5);
+	color: var(--light-color);
+}
+#login a,
+.login #backtoblog a,
+.login #nav a{
+	color: var(--light-color);
+}
+#user_pass ~ button {
+  color: var(--light-color);
+}
+.login #backtoblog a:hover, .login #nav a:hover, .login h1 a:hover {
+  color: var(--light-color);
+  text-decoration: underline;
+}
+.login #login_error, .login .message, .login .success{
+	background-color: rgba(0, 0, 0, .5);
+	margin-inline: .5rem;
+	border-color: var(--main-decor-color);
+}
+
+ #wp-submit{
+  	background-color: var(--main-color);
+  	color: var(--light-color);
+  	line-height: 2;
+  	height: unset;
+  	border-color: var(--main-color);
+  }
+.login form{
+	background: transparent;
+	border: none;
+	margin-top: 0;
+}

@@ -187,19 +187,15 @@ add_action( 'widgets_init', 'picworldtheme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function picworldtheme_styles() {
-
-}
-function picworldtheme_scripts() {
-	wp_enqueue_style( 'picworldtheme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	
+	wp_enqueue_style('flex-slider-css','https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css');
+	wp_enqueue_style( 'picworldtheme-style',get_template_directory_uri() . '/dist/main.css', array(), _S_VERSION );
 	wp_enqueue_style( 'picworldtheme-font', "https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap" );
 	wp_enqueue_style('dashicons');
 	// wp_style_add_data( 'picworldtheme-style', 'rtl', 'replace' );
+}
 
-
-
-
-	wp_enqueue_script( 'picworldtheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-
+function picworldtheme_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -209,15 +205,14 @@ function picworldtheme_scripts() {
   wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js', array('gsap-js'), false, true );
 
 
-wp_enqueue_script('flex-slider-jqeury',get_template_directory_uri() . '/inc/flexslider/jquery.flexslider.js'
+wp_enqueue_script('flex-slider-jqeury', 'https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js'
 	,array('jquery'),'',true);
-wp_enqueue_style('flex-slider-css',get_template_directory_uri() . '/inc/flexslider/flexslider.css');
-wp_enqueue_style('flex-slider-css-rtl',get_template_directory_uri() . '/inc/flexslider/flexslider-rtl.css');
 
     // Your animation code file - with gsap.js passed as a dependency
-  wp_enqueue_script( 'gsap-js2', get_template_directory_uri() . '/js/app.js', array('gsap-js','flex-slider-jqeury'), false, true );
+  wp_enqueue_script( 'main-js', get_template_directory_uri() . '/dist/bundle.js', array('gsap-js','flex-slider-jqeury'), false, true );
 }
 
+add_action( 'wp_enqueue_scripts', 'picworldtheme_styles' );
 add_action( 'wp_enqueue_scripts', 'picworldtheme_scripts' );
 
 /**
