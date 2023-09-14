@@ -108,6 +108,7 @@ $k=1;
 		  ut placeat officia modi.')); ?>
 		</p>
 	</div>
+	
 </section>
 		<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 		<?php if ( class_exists( 'WooCommerce' ) ) : ?>
