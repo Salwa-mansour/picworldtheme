@@ -20,8 +20,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 	// login img control 
 	$wp_customize->add_section(
 		'login_background_image',array(
-		'title'		  =>	'login and register background image',
-		'description' =>	'login and register background image',
+		'title'		  =>	esc_html__('login background image', 'picworldtheme'),
+		'description' =>	esc_html__('login background image', 'picworldtheme'),
 
 
 		)
@@ -39,7 +39,7 @@ function picworldtheme_customize_register( $wp_customize ) {
 				$wp_customize->add_control(
 				new WP_Customize_Image_Control(
 					$wp_customize, 'login_image', array(
-						'label'    => 'login Image ',
+						'label'    => esc_html__('login Image', 'picworldtheme'),
 						'settings' => 'login_image',
 						'section'  => 'login_background_image',
 						
@@ -50,8 +50,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 
 		$wp_customize->add_section(
 		'site_mainSlide_section',array(
-		'title'		  =>	'main slider settings',
-		'description' =>	'but items for main slider here',
+		'title'		  =>	esc_html__('main slider settings', 'picworldtheme'),
+		'description' =>	esc_html__('but items for main slider here', 'picworldtheme'),
 
 
 		)
@@ -61,8 +61,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 				// -------------------------
 		$wp_customize->add_section(
 		'image_fliper_section',array(
-		'title'		  =>	'image flipper settings',
-		'description' =>	'but items for image flipper',
+		'title'		  =>	esc_html__('image flipper settings', 'picworldtheme'),
+		'description' =>	esc_html__('but items for image flipper', 'picworldtheme'),
 
 
 		)
@@ -73,15 +73,15 @@ function picworldtheme_customize_register( $wp_customize ) {
 				$wp_customize->add_setting(
 					'image_flipper_title',array(
 						'type'				=>'theme_mod',
-						'default'			=>'daramatice changes',
+						'default'			=>esc_html__('daramatice changes', 'picworldtheme'),
 						'sanitize_callback'	=>'sanitize_text_field',
 
 					)
 				) ;
 				$wp_customize->add_control(
 					'image_flipper_title',array(
-						'label'			=>' title',
-						'description'	=>'image flipper section title',
+						'label'			=>esc_html__('title'),
+						'description'	=>esc_html__('image flipper section title', 'picworldtheme'),
 						'section'		=>'image_fliper_section',
 						'type'			=>'text',
 						'priority'      => '30',
@@ -91,16 +91,16 @@ function picworldtheme_customize_register( $wp_customize ) {
 				$wp_customize->add_setting(
 					'image_flipper_description',array(
 						'type'				=>'theme_mod',
-						'default'			=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit maiores 
-												corrupti expedita id veniam porro atque, ut placeat officia modi',
+						'default'			=>esc_html__('Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit maiores 
+												corrupti expedita id veniam porro atque, ut placeat officia modi', 'picworldtheme'),
 						'sanitize_callback'	=>'sanitize_text_field',
 
 					)
 				) ;
 				$wp_customize->add_control(
 					'image_flipper_description',array(
-						'label'			=>' description',
-						'description'	=>'image flipper section description',
+						'label'			=>esc_html__('description', 'picworldtheme'),
+						'description'	=>esc_html__('image flipper section description', 'picworldtheme'),
 						'section'		=>'image_fliper_section',
 						'type'			=>'text',
 						'priority'      => '40',
@@ -109,8 +109,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 				// -------------------------
 			$wp_customize->add_section(
 		'frontPage_lists_section',array(
-		'title'		  =>	'front page product lists settings',
-		'description' =>	'titles and number of items in each section',
+		'title'		  =>	esc_html__('front page product lists settings', 'picworldtheme'),
+		'description' =>	esc_html__('titles and number of items in each section', 'picworldtheme'),
 
 
 		)
@@ -120,15 +120,15 @@ function picworldtheme_customize_register( $wp_customize ) {
 				$wp_customize->add_setting(
 					'newest_products_title',array(
 						'type'				=>'theme_mod',
-						'default'			=>'newest products',
+						'default'			=>esc_html__('newest products', 'picworldtheme'),
 						'sanitize_callback'	=>'sanitize_text_field',
 
 					)
 				) ;
 				$wp_customize->add_control(
 					'newest_products_title',array(
-						'label'			=>' title',
-						'description'	=>'newest products section title',
+						'label'			=>esc_html__('title', 'picworldtheme'),
+						'description'	=>esc_html__('newest products section title', 'picworldtheme'),
 						'section'		=>'frontPage_lists_section',
 						'type'			=>'text'
 
@@ -145,8 +145,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 				) ;
 				$wp_customize->add_control(
 					'num_items_newest',array(
-						'label'			=>'number of items',
-						'description'	=>'number of procuts to show in newest list',
+						'label'			=>esc_html__('number of items', 'picworldtheme'),
+						'description'	=>esc_html__('number of procuts to show in newest list', 'picworldtheme'),
 						'section'		=>'frontPage_lists_section',
 						'type'			=>'number'
 
@@ -156,15 +156,15 @@ function picworldtheme_customize_register( $wp_customize ) {
 						$wp_customize->add_setting(
 							'top_rated_title',array(
 								'type'				=>'theme_mod',
-								'default'			=>'top rated',
+								'default'			=>esc_html__('top rated', 'picworldtheme'),
 								'sanitize_callback'	=>'sanitize_text_field',
 
 							)
 						) ;
 						$wp_customize->add_control(
 							'top_rated_title',array(
-								'label'			=>' title',
-								'description'	=>'top rated section title',
+								'label'			=>esc_html__('title', 'picworldtheme'),
+								'description'	=>esc_html__('top rated section title', 'picworldtheme'),
 								'section'		=>'frontPage_lists_section',
 								'type'			=>'text'
 
@@ -183,8 +183,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 						$wp_customize->add_control(
 							'num_items_topRated'
 							,array(
-								'label'			=>'number of items',
-								'description'	=>'number of procuts to show in top rated list',
+								'label'			=>esc_html__('number of items', 'picworldtheme'),
+								'description'	=>esc_html__('number of procuts to show in top rated list', 'picworldtheme'),
 								'section'		=>'frontPage_lists_section',
 								'type'			=>'number'
 
@@ -194,15 +194,15 @@ function picworldtheme_customize_register( $wp_customize ) {
 						$wp_customize->add_setting(
 							'best_selling_title',array(
 								'type'				=>'theme_mod',
-								'default'			=>'best selling',
+								'default'			=>esc_html__('best selling','picworldtheme'),
 								'sanitize_callback'	=>'sanitize_text_field',
 
 							)
 						) ;
 						$wp_customize->add_control(
 							'best_selling_title',array(
-								'label'			=>' title',
-								'description'	=>'best selling section title',
+								'label'			=>esc_html__(' title', 'picworldtheme'),
+								'description'	=>esc_html__('best selling section title', 'picworldtheme'),
 								'section'		=>'frontPage_lists_section',
 								'type'			=>'text'
 
@@ -213,7 +213,7 @@ function picworldtheme_customize_register( $wp_customize ) {
 							'num_items_bestSelling
 							',array(
 								'type'				=>'theme_mod',
-								'default'			=>'4 ',
+								'default'			=>'4',
 								'sanitize_callback'	=>'absint',
 
 							)
@@ -221,8 +221,8 @@ function picworldtheme_customize_register( $wp_customize ) {
 						$wp_customize->add_control(
 							'num_items_bestSelling
 							',array(
-								'label'			=>'number of items',
-								'description'	=>'number of procuts to show in top best selling',
+								'label'			=>esc_html__('number of items', 'picworldtheme'),
+								'description'	=>esc_html__('number of procuts to show in top best selling', 'picworldtheme'),
 								'section'		=>'frontPage_lists_section',
 								'type'			=>'number'
 
@@ -253,7 +253,7 @@ function image_fliper_images_settings($wp_customize,$k=2){
 			$wp_customize->add_control(
 				new WP_Customize_Image_Control(
 					$wp_customize, 'my_flipper_image'.$i, array(
-						'label'    => 'flipper Image '.$i,
+						'label'    => esc_html__('flipper Image', 'picworldtheme').$i,
 						'settings' => 'flipper_image'.$i,
 						'section'  => 'image_fliper_section',
 						'priority' => $i.'0',
@@ -275,7 +275,7 @@ function mainSlide_images_settings($wp_customize,$k=3){
 			$wp_customize->add_control(
 				new WP_Customize_Image_Control(
 					$wp_customize, 'my_slide_image'.$i, array(
-						'label'    => 'slide Image '.$i,
+						'label'    =>  esc_html__('slide Image ', 'picworldtheme').$i,
 						'settings' => 'slide_image'.$i,
 						'section'  => 'site_mainSlide_section',
 						'priority' => $i.'0',
@@ -284,11 +284,11 @@ function mainSlide_images_settings($wp_customize,$k=3){
 			);
 			//adding setting 
 			$wp_customize->add_setting('url_text_setting'.$i, array(
-			'default'     			   => 'start shopping',
+			'default'     			   =>  esc_html__('start shopping', 'picworldtheme'),
 			'sanitize_callback'        =>'wp_filter_nohtml_kses'
 			));
 			$wp_customize->add_control('url_text_setting'.$i, array(
-			'label'   => 'url text  '.$i,
+			'label'   => esc_html__( 'url text', 'picworldtheme').$i,
 			'section' => 'site_mainSlide_section',
 			'type'    => 'text',
 			'priority' => $i.'0',
@@ -300,7 +300,7 @@ function mainSlide_images_settings($wp_customize,$k=3){
 			'priority'				 => $i.'0',
 			));
 			$wp_customize->add_control('term_id'.$i, array(
-			'label'   => 'term id '.$i,
+			'label'   =>esc_html__(  'term id ', 'picworldtheme').$i,
 			'section' => 'site_mainSlide_section',
 			'type'    => 'number',
 			'priority' => $i.'0',

@@ -24,8 +24,8 @@
 						add_theme_support(
 							'woocommerce',
 							array(
-								'thumbnail_image_width' => 150,
-								'single_image_width'    => 300,
+								'thumbnail_image_width' => 400,
+								'single_image_width'    => 600,
 								'product_grid'          => array(
 									'default_rows'    => 5,
 									'min_rows'        => 1,

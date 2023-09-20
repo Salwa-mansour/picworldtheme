@@ -305,17 +305,23 @@ function custom_login_redirect() {
 return 'home_url()';
 
 }
-
 //add_filter('login_redirect', 'custom_login_redirect');
+// --------------
+function wp_version_remove_version() {
+return '';
+}
+add_filter('the_generator', 'wp_version_remove_version');
+// --------------
+
 /*
  * Change WP Login file URL using "login_url" filter hook
  * https://developer.wordpress.org/reference/hooks/login_url/
  */
-add_filter( 'login_url', 'custom_login_url', PHP_INT_MAX );
-function custom_login_url( $login_url ) {
-	$login_url = site_url( 'wellcom.php', 'login' );	
-    return $login_url;
-}
+// add_filter( 'login_url', 'custom_login_url', PHP_INT_MAX );
+// function custom_login_url( $login_url ) {
+// 	$login_url = site_url( 'wellcom.php', 'login' );	
+//     return $login_url;
+// }
 if(class_exists( 'WooCommerce' )){
 			add_filter( 'woocommerce_currencies', 'add_cw_currency' );
 		function add_cw_currency( $cw_currency ) {
