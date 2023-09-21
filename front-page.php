@@ -226,8 +226,9 @@ wp_reset_query();
 
 
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-	<section id="group-3" class="front-section"  style="background-image: url('<?php echo(esc_url( get_template_directory_uri( )).'/inc/starsBackground(1).jpg') ?>;)'">
-<?php //do_action( 'picworldtheme_get_sale_product' ); ?>	
+<?php $topRated_background = esc_url(wp_get_attachment_url(get_theme_mod('topRated_background')));?>
+	<section id="group-3" class="front-section"  style="background-image: url('<?php echo($topRated_background);?>;)'">
+<?php //do_action( 'picworldtheme_get_sale_product' );?>	
 
 	
 		<h1><?php esc_html_e( get_theme_mod( 'top_rated_title','top rated title')); ?></h1>

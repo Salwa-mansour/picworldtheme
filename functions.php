@@ -189,7 +189,7 @@ add_action( 'widgets_init', 'picworldtheme_widgets_init' );
 function picworldtheme_styles() {
 	
 	wp_enqueue_style('flex-slider-css','https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css');
-	wp_enqueue_style( 'picworldtheme-style',get_template_directory_uri() . '/dist/main.css', array(), _S_VERSION );
+	wp_enqueue_style( 'picworldtheme-style',get_stylesheet_uri(), array(), _S_VERSION );
 	wp_enqueue_style( 'picworldtheme-font', "https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap" );
 	wp_enqueue_style('dashicons');
 	// wp_style_add_data( 'picworldtheme-style', 'rtl', 'replace' );
@@ -295,7 +295,7 @@ function picworldtheme_login_logo_url_title() {
 add_filter( 'login_headertext', 'picworldtheme_login_logo_url_title' );
 
 function picworldtheme_login_stylesheet() {
-    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/inc/style-login.css' );
+    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/src/css/style-login.css' );
     // wp_enqueue_script( 'custom-login', get_stylesheet_directory_uri() . '/style-login.js' );
 }
 add_action( 'login_enqueue_scripts', 'picworldtheme_login_stylesheet' );

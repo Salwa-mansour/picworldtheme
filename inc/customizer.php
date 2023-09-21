@@ -190,6 +190,27 @@ function picworldtheme_customize_register( $wp_customize ) {
 
 							)
 						) ;
+
+						$wp_customize->add_setting(
+					'topRated_background',array(
+						'type'				=>'theme_mod',
+						
+						'sanitize_callback'	=>'my_customize_sanitize_feature_image',
+
+					)
+				) ;
+				
+				$wp_customize->add_control(
+				new WP_Customize_Image_Control(
+					$wp_customize, 'topRated_background', array(
+						'label'    => esc_html__('top rated background image', 'picworldtheme'),
+						'settings' => 'topRated_background',
+						'section'  => 'frontPage_lists_section',
+						
+					)
+				)
+			);
+
 					// theird section 
 						$wp_customize->add_setting(
 							'best_selling_title',array(
@@ -331,6 +352,6 @@ function picworldtheme_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function picworldtheme_customize_preview_js() {
-	wp_enqueue_script( 'picworldtheme-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
+	wp_enqueue_script( 'picworldtheme-customizer', get_template_directory_uri() . '/src/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
 }
 add_action( 'customize_preview_init', 'picworldtheme_customize_preview_js' );
